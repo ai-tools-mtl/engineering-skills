@@ -6,15 +6,113 @@
 
 ## 技能一览
 
-| 技能 | 触发场景 | 核心覆盖 |
-|------|---------|---------|
-| **[java-coding-standards](./java-coding-standards)** | 编写 Java 代码、Code Review | 命名风格（UpperCamelCase/lowerCamelCase/常量全大写）；OOP 规约（`equals`/`hashCode`、包装类型、BigDecimal）；集合处理（`isEmpty`、diamond、toArray(T[0])）；并发处理（线程池、ThreadLocal、锁粒度）；控制语句（卫语句、三目 NPE）；注释规约（Javadoc、TODO/FIXME） |
-| **[java-design-standards](./java-design-standards)** | 架构设计、技术评审、画 UML | 设计图规范（状态图 >3 状态、时序图 >3 对象、类图 >5 类）；SOLID 原则；DRY 与可扩展性；错误码体系（A/B/C 三级） |
-| **[java-exception-logging](./java-exception-logging)** | 异常处理、日志配置、错误码设计 | 错误码规范（5 位字符串、A/B/C 来源分级）；异常处理（禁止空 catch、finally 禁止 return、事务回滚）；日志规约（SLF4J、占位符、15 天保留、敏感信息脱敏） |
-| **[java-mysql-database](./java-mysql-database)** | 数据库设计、SQL 编写、ORM 配置 | 建表规约（`is_xxx` 布尔字段、逻辑删除、三字段必备）；索引规约（唯一索引、覆盖索引、延迟关联）；SQL 规范（`count(*)`、`ISNULL()`、禁止外键级联）；ORM 映射（`#{}` 防注入、`resultMap`） |
-| **[java-project-structure](./java-project-structure)** | 项目分层、依赖管理、服务器配置 | 应用分层（API / Web / Service / Manager / DAO）；领域模型（DO/DTO/BO/VO/Query）；二方库规范（GAV、SNAPSHOT 禁用、版本统一变量）；服务器调优（TCP time_wait、fd 限制、JVM dump） |
-| **[java-security-standards](./java-security-standards)** | 安全功能实现、渗透测试修复 | 权限控制、参数校验、SQL 注入防护；敏感信息脱敏、配置文件密码加密；XSS 过滤、CSRF 验证、防重放、文件上传管控 |
-| **[java-unit-testing](./java-unit-testing)** | 编写单元测试、测试评审 | AIR 原则（Automatic / Independent / Repeatable）；BCDE 原则（Border / Correct / Design / Error）；核心模块 100% 语句+分支覆盖；数据库测试回滚 |
+### java-coding-standards
+
+| 项 | 内容 |
+|----|------|
+| **触发场景** | 编写 Java 代码、Code Review |
+| **基础** | 阿里巴巴 Java 开发手册编程规约 |
+
+**核心覆盖**：
+- **命名风格**：类名 UpperCamelCase（DO/PO/DTO/BO/VO/UID 例外）；方法/参数/变量 lowerCamelCase；常量全大写下划线分隔；抽象类以 `Abstract` 或 `Base` 开头；异常类以 `Exception` 结尾；测试类以 `Test` 结尾；包名全小写单数
+- **常量定义**：禁止魔法值直接出现在代码中；`long`/`Long` 赋值用大写 `L`；浮点数后缀统一大写 `D`/`F`；按功能归类常量，不要一个大而全的常量类；固定范围内变化的变量用 `enum`
+- **代码格式**：4 空格缩进（禁止 Tab）；左大括号前不换行；运算符两侧加空格；单行不超过 120 字符；方法总行数不超过 80 行
+- **OOP 规约**：覆写方法必须加 `@Override`；`Object.equals` 用常量或确定有值的对象调用；整型包装类比较用 `equals`；货币金额以最小货币单位整型存储；浮点数等值判断用误差范围或 `BigDecimal`；`BigDecimal.compareTo()` 而非 `equals`；POJO 类属性必须使用包装数据类型；禁止在 POJO 中同时存在 `isXxx()` 和 `getXxx()`
+- **日期时间**：年份统一用小写 `y`（`yyyy` 而非 `YYYY`）；获取当前毫秒数用 `System.currentTimeMillis()`；禁止使用 `java.sql.Date/Time/Timestamp`；禁止写死一年 365 天
+- **集合处理**：覆写 `equals` 必须覆写 `hashCode`；判断空用 `isEmpty()` 而非 `size()==0`；`Collectors.toMap()` 必须传 `mergeFunction` 处理 key 重复；`subList` 不可强转 `ArrayList`；`Arrays.asList()` 返回的集合不可增删；不要在 `foreach` 里 `remove/add`，用 `Iterator`
+- **并发处理**：获取单例对象保证线程安全；线程资源必须通过线程池提供；禁止使用 `Executors` 创建线程池（用 `ThreadPoolExecutor`）；`SimpleDateFormat` 线程不安全；必须回收自定义 `ThreadLocal`；能用无锁数据结构就不用锁；多资源加锁保持一致的加锁顺序
+- **控制语句**：`switch` 必须包含 `default`；`switch` 变量为外部 String 时必须先判 null；`if/for/while/do` 必须使用大括号；三目运算符注意自动拆箱 NPE；高并发避免用 "等于" 判断作为中断条件；表达异常分支少用 `if-else`（推荐卫语句）；公开接口需入参保护
+- **注释规约**：类/属性/方法必须使用 Javadoc（`/** */`）；所有抽象方法必须 Javadoc；类必须添加 `@author` 和 `@date`；方法内部单行注释用 `//`，多行用 `/* */`；枚举类型字段必须有注释
+- **前后端规约**：API 必须明确协议/域名/路径/请求方法/请求内容/状态码/响应体；生产环境必须用 HTTPS；返回空列表用 `[]` 或 `{}`；错误响应包含 HTTP 状态码 + errorCode + errorMessage + 用户提示；JSON key 用小写开头的 lowerCamelCase；超大整数服务端用 `String` 返回（禁用 `Long`）
+
+---
+
+### java-design-standards
+
+| 项 | 内容 |
+|----|------|
+| **触发场景** | 架构设计、技术评审、画 UML |
+| **基础** | 阿里巴巴 Java 开发手册设计规约 |
+
+**核心覆盖**：
+- **设计图规范**：状态超过 3 个用状态图；调用链路涉及对象超过 3 个用时序图；模型类超过 5 个且依赖复杂用类图；超过 2 个对象协作且流程复杂用活动图；用户超过一类且 UseCase 超过 5 个用用例图
+- **架构原则**：准确识别弱依赖并设计降级和应急预案；系统边界明确；非功能性需求（安全性、可用性、可扩展性）在设计阶段明确
+- **设计原则**：单一职责原则（SRP）；谨慎使用继承，优先聚合/组合；依赖倒置（依赖抽象类与接口）；对扩展开放、对修改闭合（OCP）；DRY 原则（禁止重复代码）
+- **错误码体系**：5 位字符串，A（用户端）/ B（系统端）/ C（第三方）分级；一级宏观错误码：A0001 / B0001 / C0001；编号不体现版本号和错误等级
+
+---
+
+### java-exception-logging
+
+| 项 | 内容 |
+|----|------|
+| **触发场景** | 异常处理、日志配置、错误码设计 |
+| **基础** | 阿里巴巴 Java 开发手册异常日志规约 |
+
+**核心覆盖**：
+- **错误码**：5 位字符串（来源 + 四位数字）；A=用户端、B=系统端、C=第三方；不体现版本号和错误等级；正常返回用 `00000`；错误码不能直接输出给用户做提示
+- **异常处理**：可通过预检查规避的 `RuntimeException`（如 `NullPointerException`、`IndexOutOfBoundsException`）禁止用 `catch` 处理；异常捕获后禁止用于流程控制；`catch` 必须区分稳定代码与非稳定代码；捕获异常是为了处理它，禁止空 `catch`；事务场景中 `catch` 后如需回滚必须手动回滚；`finally` 块必须关闭资源；`finally` 中禁止 `return`；调用 RPC/二方包/动态生成类时用 `Throwable` 拦截
+- **日志规约**：应用禁止直接使用 `Log4j`/`Logback` API，必须使用门面模式（SLF4J / JCL）；日志文件至少保存 15 天；网络运行状态/安全事件/个人敏感信息操作日志保留不少于 6 个月；字符串拼接用占位符（`{}`）；`trace/debug/info` 级别输出前必须做级别开关判断；生产环境禁止 `System.out`/`e.printStackTrace()`；异常信息必须包含案发现场 + 异常堆栈；禁止直接用 JSON 工具将对象转 String 打印；敏感信息需脱敏
+
+---
+
+### java-mysql-database
+
+| 项 | 内容 |
+|----|------|
+| **触发场景** | 数据库设计、SQL 编写、ORM 配置 |
+| **基础** | 阿里巴巴 Java 开发手册 MySQL 数据库规约 |
+
+**核心覆盖**：
+- **建表规约**：表达是与否的字段用 `is_xxx` + `unsigned tinyint`；表名/字段名必须小写，禁止数字开头；表名不使用复数；禁用保留字；主键索引名 `pk_字段名`，唯一索引 `uk_字段名`，普通索引 `idx_字段名`；小数类型用 `decimal`（禁用 `float`/`double`）；`varchar` 长度不超过 5000，超过用 `text` 并独立成表；表必备三字段：`id`（`bigint unsigned` 自增）、`create_time`、`update_time`；禁止使用物理删除，使用逻辑删除
+- **索引规约**：具有唯一特性的字段必须建唯一索引；超过三个表禁止 `join`；`varchar` 上建索引必须指定索引长度；页面搜索严禁左模糊或全模糊；利用覆盖索引避免回表；`order by` 字段放在组合索引最后；建组合索引时区分度最高的放最左边
+- **SQL 语句**：不要用 `count(列名)` 或 `count(常量)` 替代 `count(*)`；使用 `ISNULL()` 判断 NULL；分页查询 `count` 为 0 直接返回；禁止使用外键与级联（应用层解决）；禁止使用存储过程；数据订正先 `select` 再执行；多表操作列名前加表别名；`in` 操作元素数量控制在 1000 以内
+- **ORM 映射**：查询禁止使用 `*` 作为字段列表；POJO 布尔属性不加 `is`，数据库字段必须加 `is_`，需在 `resultMap` 中映射；不要用 `resultClass` 做返回参数；sql.xml 参数用 `#{}`（禁用 `${}` 防注入）；`iBATIS` 的 `queryForList(statementName, start, size)` 不推荐使用；更新数据时必须同时更新 `update_time`
+
+---
+
+### java-project-structure
+
+| 项 | 内容 |
+|----|------|
+| **触发场景** | 项目分层、依赖管理、服务器配置 |
+| **基础** | 阿里巴巴 Java 开发手册工程结构规约 |
+
+**核心覆盖**：
+- **应用分层**：开放 API 层 → 终端显示层 → Web 层（Controller）→ Service 层 → Manager 层 → DAO 层 → 第三方服务 → 外部数据接口；上层可依赖下层，默认上层依赖下层
+- **领域模型**：DO（Data Object，数据库表对应）；DTO（Data Transfer Object，传输对象）；BO（Business Object，业务对象）；Query（查询对象，超过 2 个参数禁止用 `Map`）；VO（View Object，展示对象）
+- **二方库依赖**：GroupId 格式 `com.{公司/BU}.业务线.[子业务线]`；ArtifactId 格式 `产品线名-模块名`；版本号 `主.次.修订`（起始必须为 1.0.0）；线上禁止依赖 `SNAPSHOT`；二方库新增/升级保持其他 jar 包仲裁结果不变；接口返回值不允许使用枚举类型或含枚举的 POJO；依赖同一个二方库群必须定义统一版本变量
+- **服务器**：调用远程操作必须有超时设置；高并发服务器调小 TCP `time_wait` 超时时间；调大最大文件句柄数；JVM 设置 `-XX:+HeapDumpOnOutOfMemoryError`；线上 `Xms` 和 `Xmx` 设置相同大小
+
+---
+
+### java-security-standards
+
+| 项 | 内容 |
+|----|------|
+| **触发场景** | 安全功能实现、渗透测试修复 |
+| **基础** | 阿里巴巴 Java 开发手册安全规约 |
+
+**核心覆盖**：
+- **权限与数据安全**：隶属用户个人的页面或功能必须进行权限控制校验；用户敏感数据禁止直接展示，必须脱敏（如手机号 `139****1219`）
+- **输入校验**：用户输入 SQL 参数严格使用参数绑定或 `METADATA` 字段限定，禁止字符串拼接 SQL；用户请求传入的任何参数必须做有效性验证（防 page size 过大导致 OOM、恶意 order by 导致慢查询、缓存击穿、SSRF、任意重定向、SQL 注入、Shell 注入、反序列化注入、ReDoS）
+- **攻击防护**：禁止向 HTML 页面输出未经安全过滤或未正确转义的用户数据（防 XSS）；表单/AJAX 提交必须执行 CSRF 安全验证；URL 外部重定向传入的目标地址必须执行白名单过滤；使用平台资源（短信/邮件/电话/下单/支付）必须实现防重放机制（数量限制、疲劳度控制、验证码校验）
+- **文件与配置**：文件上传需严格检查大小和类型；配置文件中的密码需要加密；发帖/评论/发送即时消息需实现防刷和内容违禁词过滤
+
+---
+
+### java-unit-testing
+
+| 项 | 内容 |
+|----|------|
+| **触发场景** | 编写单元测试、测试评审 |
+| **基础** | 阿里巴巴 Java 开发手册单元测试规约 |
+
+**核心覆盖**：
+- **AIR 原则**：Automatic（自动化）、Independent（独立性）、Repeatable（可重复）
+- **强制规范**：单元测试必须全自动执行且非交互式；禁止使用 `System.out` 人肉验证，必须使用 `assert`；测试用例之间禁止互相调用或依赖执行顺序；单元测试不能受外界环境影响（网络、服务、中间件）；测试粒度至多是类级别，一般是方法级别；核心业务/应用/模块的增量代码必须确保单元测试通过；单元测试代码必须写在 `src/test/java`
+- **BCDE 原则**：Border（边界值测试）、Correct（正确输入得到预期结果）、Design（结合设计文档编写）、Error（强制错误信息输入得到预期结果）
+- **覆盖率与数据**：语句覆盖率目标 70%；核心模块语句覆盖率和分支覆盖率都达到 100%；数据库相关测试不能假设数据存在，需用程序插入准备数据；数据库测试可设定自动回滚机制；单元测试数据加明确前后缀标识
 
 ---
 
@@ -37,3 +135,5 @@
 > "Java 集合第 9 条" → 返回 `toArray(T[0])` 的详细说明与性能分析
 >
 > "并发处理线程池强制规则" → 返回 `ThreadPoolExecutor` 规范与 `Executors` 禁用原因
+>
+> "MySQL 建表必备三字段" → 返回 `id`/`create_time`/`update_time` 规范
