@@ -1,0 +1,7 @@
+{
+  "name": "f2e-skills",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Alibaba front-end coding standards as Claude Code skills",
+  "license": "MIT"
+}
