@@ -17,7 +17,7 @@
 ## 仓库结构
 
 ```
-skill-collection/
+engineering-skills/
 ├── f2e-skills/                          # 阿里巴巴前端编码规范技能集
 │   ├── AGENTS.md                        # 前端技能总览与核心原则
 │   ├── package.json
