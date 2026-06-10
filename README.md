@@ -1,110 +1,230 @@
 # Engineering Skills
 
-面向 Claude Code（及兼容 Agent 框架）的编码技能集合，将业界成熟的技术规范转化为 AI 可执行的决策指导。
+A collection of engineering skills for AI coding agents. Skills are packaged instructions that extend agent capabilities with industry-standard coding conventions from Alibaba f2e-spec, Java Development Manual, and Python community best practices.
 
-## 安装
+Skills follow the [Agent Skills](https://agentskills.io/) format.
+
+## Available Skills
+
+### f2e-engineering
+
+Enforces Alibaba front-end engineering standards for Git commits, API design, documentation, and changelogs.
+
+**Use when:**
+- Writing Git commit messages
+- Designing RESTful APIs
+- Writing documentation or changelogs
+- Following front-end engineering conventions
+
+### f2e-javascript
+
+Enforces Alibaba front-end coding standards for JavaScript and TypeScript code.
+
+**Use when:**
+- Writing .js, .jsx, .ts, or .tsx files
+- Reviewing JavaScript/TypeScript code
+- Following JS/TS coding conventions
+
+### f2e-markup
+
+Enforces Alibaba front-end coding standards for HTML, CSS, Sass, and Less.
+
+**Use when:**
+- Writing .html, .css, .scss, .less, or .sass files
+- Reviewing markup or styling code
+- Following HTML/CSS conventions
+
+### f2e-node
+
+Enforces Alibaba front-end coding standards for Node.js server-side development.
+
+**Use when:**
+- Writing Express/Koa server code
+- Building Node.js APIs
+- Following Node.js coding conventions
+
+### f2e-react
+
+Enforces Alibaba front-end coding standards for React components, hooks, and JSX.
+
+**Use when:**
+- Writing React components or hooks
+- Building JSX/TSX files
+- Following React coding conventions
+
+### java-coding-standards
+
+Alibaba Java coding standards covering naming style, constants, code format, OOP, date/time, collections, concurrency, control statements, and comments.
+
+**Use when:**
+- Writing Java code
+- Reviewing Java code
+- Following Alibaba Java coding standards
+
+### java-design-standards
+
+Alibaba Java design standards covering software architecture, design patterns, and design principles.
+
+**Use when:**
+- Designing software architecture
+- Applying design patterns
+- Making design decisions in Java projects
+
+### java-exception-logging
+
+Alibaba Java exception and logging standards covering error codes, exception handling, and logging rules.
+
+**Use when:**
+- Handling exceptions in Java
+- Configuring logging
+- Designing error code systems
+
+### java-mysql-database
+
+Alibaba Java MySQL database standards covering table design, indexing, SQL statements, and ORM mapping.
+
+**Use when:**
+- Designing database schemas
+- Writing SQL queries
+- Working with MySQL in Java applications
+
+### java-project-structure
+
+Alibaba Java project structure standards covering application layering, library dependencies, and server setup.
+
+**Use when:**
+- Structuring Java projects
+- Managing dependencies
+- Organizing project architecture
+
+### java-security-standards
+
+Alibaba Java security standards covering XSS, CSRF, SQL injection prevention, and data masking.
+
+**Use when:**
+- Implementing authentication or authorization
+- Handling user input securely
+- Preventing OWASP vulnerabilities
+
+### java-unit-testing
+
+Alibaba Java unit testing standards following AIR and BCDE principles.
+
+**Use when:**
+- Writing JUnit tests
+- Designing test cases
+- Reviewing test quality
+
+### python-coding-standards
+
+PEP 8 and community best-practice coding standards covering naming, formatting, Pythonic idioms, data structures, strings, iterators/generators, and docstrings.
+
+**Use when:**
+- Writing Python code
+- Reviewing Python code
+- Following PEP 8 standards
+
+### python-type-hints
+
+Python type system standards covering type annotations, mypy configuration, Pydantic models, generics, Protocol, and TypeVar.
+
+**Use when:**
+- Writing type hints
+- Configuring mypy
+- Building Pydantic models
+- Designing typed APIs
+
+### python-design-standards
+
+Python design principles and project structure standards covering SOLID, design patterns, layered architecture, and dependency management.
+
+**Use when:**
+- Designing Python project architecture
+- Organizing modules
+- Making design decisions
+
+### python-exception-logging
+
+Python exception handling and logging standards covering exception hierarchy, structured logging, and error code systems.
+
+**Use when:**
+- Handling exceptions in Python
+- Configuring structured logging
+- Designing error handling strategies
+
+### python-database
+
+Python database operation standards covering SQLAlchemy 2.0, Django ORM, connection pool management, and migration strategies.
+
+**Use when:**
+- Writing database queries
+- Designing schemas
+- Configuring ORM in Python projects
+
+### python-web-api
+
+Python Web/API development standards covering FastAPI, Django REST, Flask conventions, RESTful design, and async processing.
+
+**Use when:**
+- Building REST APIs with FastAPI or Django
+- Designing API endpoints
+- Working with Flask or FastAPI
+
+### python-security-standards
+
+Python security development standards covering input validation, SQL injection prevention, XSS prevention, authentication, and key management.
+
+**Use when:**
+- Implementing security features
+- Handling user input
+- Configuring authentication
+
+### python-unit-testing
+
+Python unit testing standards covering pytest best practices, mock strategies, coverage requirements, and fixtures design.
+
+**Use when:**
+- Writing pytest tests
+- Setting up test infrastructure
+- Reviewing test quality
+
+### pua
+
+Forces high-agency exhaustive problem-solving with corporate PUA pressure across all task types.
+
+**Use when:**
+- User frustration or repeated failures
+- Passive agent behavior
+- Quality complaints
+- Need for maximum effort output
+
+## Installation
 
 ```bash
-# 克隆仓库
-git clone https://github.com/ai-tools-mtl/engineering-skills.git
-
-# 安装单个 skill
-cp -R skills/f2e-engineering ~/.claude/skills/
-
-# 安装全部 skill
-cp -R skills/* ~/.claude/skills/
+npx add-skill ai-tools-mtl/engineering-skills
 ```
 
-Codex 用户：
-```bash
-cp -R skills/* ~/.codex/skills/
+## Usage
+
+Skills are automatically available once installed. The agent will use them when relevant tasks are detected.
+
+**Examples:**
+```
+Review this Python code for PEP 8 compliance
+```
+```
+Help me design a MySQL schema following Alibaba standards
+```
+```
+Audit this React component for best practices
 ```
 
----
+## Skill Structure
 
-## Skill 索引
-
-### 前端规范（阿里巴巴 f2e-spec）
-
-| Skill | 说明 | 触发关键词 |
-|-------|------|-----------|
-| [`f2e-engineering`](skills/f2e-engineering/SKILL.md) | Git / API / 文档 / Changelog 工程规约 | commit, API design, changelog |
-| [`f2e-javascript`](skills/f2e-javascript/SKILL.md) | JavaScript & TypeScript 编码规约 | .js, .ts, .jsx, .tsx |
-| [`f2e-markup`](skills/f2e-markup/SKILL.md) | HTML & CSS 编码规约 | .html, .css, .scss |
-| [`f2e-node`](skills/f2e-node/SKILL.md) | Node.js 服务端开发规约 | express, koa, server |
-| [`f2e-react`](skills/f2e-react/SKILL.md) | React 组件与 Hooks 编码规约 | React, JSX, hooks |
-
-### Java 规范（阿里巴巴 Java 开发手册）
-
-| Skill | 说明 | 触发关键词 |
-|-------|------|-----------|
-| [`java-coding-standards`](skills/java-coding-standards/SKILL.md) | 命名 / OOP / 集合 / 并发 / 控制语句 / 注释 | Java coding, code review |
-| [`java-design-standards`](skills/java-design-standards/SKILL.md) | 架构设计 / UML / 设计原则 | architecture, UML, design |
-| [`java-exception-logging`](skills/java-exception-logging/SKILL.md) | 错误码 / 异常处理 / 日志 | exception, logging, error code |
-| [`java-mysql-database`](skills/java-mysql-database/SKILL.md) | 建表 / 索引 / SQL / ORM | MySQL, SQL, database |
-| [`java-project-structure`](skills/java-project-structure/SKILL.md) | 分层 / 二方库 / 服务器 | project structure, layers |
-| [`java-security-standards`](skills/java-security-standards/SKILL.md) | XSS / CSRF / SQL 注入 / 脱敏 | security, XSS, CSRF |
-| [`java-unit-testing`](skills/java-unit-testing/SKILL.md) | AIR 原则 / BCDE 原则 | unit test, JUnit |
-
-### Python 规范（PEP 8 + 社区最佳实践）
-
-| Skill | 说明 | 触发关键词 |
-|-------|------|-----------|
-| [`python-coding-standards`](skills/python-coding-standards/SKILL.md) | 命名 / 格式 / Pythonic / 迭代器 / 文档 | Python coding, PEP 8 |
-| [`python-type-hints`](skills/python-type-hints/SKILL.md) | 类型注解 / mypy / Pydantic | type hints, mypy, typing |
-| [`python-design-standards`](skills/python-design-standards/SKILL.md) | SOLID / 设计模式 / 分层架构 | architecture, design pattern |
-| [`python-exception-logging`](skills/python-exception-logging/SKILL.md) | 异常层次 / 错误码 / structlog | exception, logging, structlog |
-| [`python-database`](skills/python-database/SKILL.md) | SQLAlchemy / Django ORM / SQL 规范 | database, SQLAlchemy, ORM |
-| [`python-web-api`](skills/python-web-api/SKILL.md) | FastAPI / DRF / Flask RESTful | API, FastAPI, Django REST |
-| [`python-security-standards`](skills/python-security-standards/SKILL.md) | OWASP / 输入校验 / 认证授权 | security, OWASP, auth |
-| [`python-unit-testing`](skills/python-unit-testing/SKILL.md) | pytest / fixtures / mock / 覆盖率 | pytest, unit test, coverage |
-
-### Agent 协议
-
-| Skill | 说明 | 触发关键词 |
-|-------|------|-----------|
-| [`pua`](skills/pua/SKILL.md) | 高能动性 Agent 激励协议（12 种企业文化风格） | agent motivation, PUA |
-
----
-
-## 仓库结构
-
-```
-engineering-skills/
-├── skills/                              # 所有 skill 的统一目录
-│   ├── f2e-engineering/SKILL.md         # 前端工程规约
-│   ├── f2e-javascript/SKILL.md          # JS/TS 编码规约
-│   ├── f2e-markup/SKILL.md              # HTML/CSS 编码规约
-│   ├── f2e-node/SKILL.md                # Node.js 规约
-│   ├── f2e-react/SKILL.md               # React 规约
-│   ├── java-coding-standards/SKILL.md   # Java 编程规约
-│   ├── java-design-standards/SKILL.md   # Java 设计规约
-│   ├── java-exception-logging/SKILL.md  # Java 异常日志规约
-│   ├── java-mysql-database/SKILL.md     # Java MySQL 规约
-│   ├── java-project-structure/SKILL.md  # Java 工程结构规约
-│   ├── java-security-standards/SKILL.md # Java 安全规约
-│   ├── java-unit-testing/SKILL.md       # Java 单元测试规约
-│   ├── python-coding-standards/SKILL.md # Python 编码规约
-│   ├── python-type-hints/SKILL.md       # Python 类型注解规约
-│   ├── python-design-standards/SKILL.md # Python 设计规约
-│   ├── python-exception-logging/SKILL.md# Python 异常日志规约
-│   ├── python-database/SKILL.md         # Python 数据库规约
-│   ├── python-web-api/SKILL.md          # Python Web API 规约
-│   ├── python-security-standards/SKILL.md# Python 安全规约
-│   ├── python-unit-testing/SKILL.md     # Python 单元测试规约
-│   └── pua/SKILL.md                     # 高能动性 Agent 激励协议
-├── package.json
-└── README.md
-```
-
----
-
-## 设计原则
-
-1. **可追溯**：所有规则保留原始规范编号，便于对照原文
-2. **分级明确**：每条规则标注「强制」「推荐」「参考」三级
-3. **自动应用**：编写代码时静默合规，无需额外提示
-4. **最小侵入**：以决策指导形式存在，不替代 linter/formatter
+Each skill contains:
+- `SKILL.md` - Instructions for the agent
+- `scripts/` - Helper scripts for automation (optional)
+- `references/` - Supporting documentation (optional)
 
 ## License
 
