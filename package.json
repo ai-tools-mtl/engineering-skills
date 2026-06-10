@@ -1,0 +1,16 @@
+{
+  "name": "engineering-skills",
+  "version": "1.1.0",
+  "description": "Engineering skill collection for Claude Code and Codex — Alibaba f2e-spec, Java Handbook, Python best practices, and high-agency agent protocol",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "codex",
+    "skill",
+    "f2e",
+    "java",
+    "python",
+    "coding-standards",
+    "agent"
+  ]
+}
