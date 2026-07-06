@@ -1,0 +1,10 @@
+/* 样式总入口(在 main.ts 里 import)。
+   按序:modern-normalize 重置 → 滚动条 → EP 覆盖 → 通用业务类。
+   theme.scss 不在这里 import,而是经 vite.config.ts 的 scss.additionalData 全局注入。 */
+@import 'modern-normalize/modern-normalize.css';
+
+@import './scrollbar.css';
+
+@import './element-ui.scss';
+
+@import './common.scss';

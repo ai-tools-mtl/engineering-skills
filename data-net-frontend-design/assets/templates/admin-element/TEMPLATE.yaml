@@ -1,0 +1,32 @@
+# 模板元信息。字段说明见 ../_TEMPLATE_GUIDE.md。
+
+id: admin-element
+name: 蓝渐变管理端
+tagline: Vue3 + Element Plus + UnoCSS,蓝色纵向渐变底壳 + 三件套列表页范式的中后台管理端
+
+useCases:
+  - 中后台管理系统
+  - 审核 / 运营 / 治理平台
+  - 政务 / 企业级管理后台
+  - 需要丰富 UI 组件(表格/表单/弹窗/树/级联)的数据密集型管理界面
+
+distinctiveFeatures:
+  - 整体蓝色纵向渐变底壳(浅蓝→深蓝 #e6f3ff→#0852e5),最强辨识度
+  - Element Plus 组件库(按需自动导入),开箱即用的表格/表单/弹窗等
+  - 封装的"三件套":BaseLayout(三段式容器) + CommonSearch(可展开搜索区) + BaseTable(表格+分页)
+  - 主色 #1677ff,菜单激活 #055dd9,弹窗统一蓝渐变底 + 8px 圆角
+  - UnoCSS 原子类(rem→px,1rem=4px)+ SCSS 双令牌体系
+  - 侧边栏可折叠,面包屑由路由 matched 生成,菜单由路由表数据驱动
+  - 面向桌面,min-width 1440px,无响应式
+
+stack:
+  framework: Vue 3
+  language: TypeScript
+  build: Vite
+  uiLibrary: Element Plus(按需自动导入)
+  styling: SCSS + UnoCSS(原子类)
+  state: Pinia
+  router: vue-router
+
+default: false
+version: 1.0.0

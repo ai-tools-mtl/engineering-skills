@@ -1,0 +1,147 @@
+// Element Plus 变量覆盖 + 组件定制。
+// 主色与 theme.scss 对齐(#1677ff);语义色用 Arco 配色(success/warning/error)。
+// 弹窗统一蓝渐变背景 + 8px 圆角;表格头浅蓝灰;分页激活态浅蓝。
+:root {
+    --el-font-size-base: 14px;
+    --el-form-label-font-size: 14px;
+    --el-menu-item-font-size: 16px !important;
+
+    --el-color-primary: #1677ff;
+    --el-color-primary-light-3: #4196ff;
+    --el-color-primary-light-9: #eaf4ff;
+
+    --el-color-success: #00b42a;
+    --el-color-success-light-9: #dffded;
+
+    --el-color-warning: #ff7d00;
+    --el-color-warning-light-9: #fff5e7;
+
+    --el-color-error: #f53f3f;
+    --el-color-danger-light-9: #ffe9e9;
+
+    .el-tag {
+        --el-tag-font-size: 14px;
+        border: none;
+    }
+}
+
+// 分页:激活页浅蓝底 + 主色字 + 4px 圆角
+.el-pagination {
+    .el-select__wrapper,
+    .el-input__wrapper {
+        background-color: transparent;
+    }
+    .el-pager li.is-active {
+        background-color: #e3eeff !important;
+        color: var(--el-color-primary) !important;
+        border-radius: 4px;
+    }
+}
+
+// 面包屑:灰色非激活 / 末级深色
+.el-breadcrumb {
+    --el-text-color-primary: #9aa5b7;
+    padding: 12px 0;
+    font-size: 16px;
+
+    .el-breadcrumb__inner.is-link {
+        font-weight: 400;
+    }
+}
+
+// 弹窗变体:渐变蓝底 + 8px 圆角(用 class="my-dialog" 调用)
+.my-dialog.el-dialog {
+    max-height: 75vh;
+    overflow: hidden;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    background: linear-gradient(179deg, #cedbf8 1.17%, #f4f7ff 61.64%, #fff 96.48%);
+    .el-dialog__header.show-close {
+        font-size: 20px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 24px 20px 32px;
+        border-bottom: 1px solid #d9d9d9;
+        .el-dialog__headerbtn {
+            height: unset;
+            width: unset;
+            position: unset;
+            .el-dialog__close {
+                font-size: 22px;
+                color: #666;
+                &:hover {
+                    color: #1677ff;
+                }
+            }
+        }
+    }
+    .el-dialog__body {
+        padding: 40px 40px;
+        overflow: auto;
+    }
+    .el-dialog__footer {
+        padding: 40px;
+        margin: auto;
+    }
+}
+
+// 表格单元格通用
+.el-table .cell.el-tooltip {
+    min-width: 50px;
+    white-space: nowrap;
+}
+.el-table .cell {
+    box-sizing: border-box;
+    line-height: 23px;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    padding: 0 12px;
+    font-weight: 400;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+.el-table__empty-text {
+    color: var(--el-text-color-secondary);
+    line-height: 60px;
+    width: 50%;
+    font-size: 14px;
+}
+.el-table th.el-table__cell {
+    background-color: #f5f7fa !important;
+}
+
+.el-tooltip__trigger:focus-visible {
+    outline: unset;
+}
+
+.el-descriptions__body .el-descriptions__table.is-bordered .el-descriptions__cell {
+    font-weight: 400;
+}
+
+// 消息框按钮居中
+.el-message-box__btns {
+    justify-content: center;
+    padding: 24px 0 8px;
+}
+.el-message-box__message {
+    word-break: break-all;
+}
+
+// 表格内链接:撑满 + 省略
+.el-table {
+    .el-link {
+        width: 100%;
+        justify-content: flex-start !important;
+    }
+    .el-link__inner {
+        display: inline-block !important;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}

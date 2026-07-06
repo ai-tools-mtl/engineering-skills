@@ -1,0 +1,45 @@
+# 模板元信息
+# 本文件描述一个前端模板的身份与特征,供 registry.md 索引、供 AI 选模板时读取。
+# 添加新模板时,复制本文件到新模板目录并改写各字段。字段说明见 _TEMPLATE_GUIDE.md。
+
+# 模板唯一标识(kebab-case,与目录名一致)
+id: cloud-console
+
+# 展示名(给用户看的)
+name: 云控制台
+
+# 一句话定位
+tagline: 浅色、#1677ff 品牌色、小圆角、轻阴影的云控制台风格
+
+# 适用场景(用于匹配需求)
+useCases:
+  - 后台管理系统
+  - 数据看板 / 仪表盘
+  - 内部工具 / 运营平台
+  - SaaS 控制台
+  - 企业级 Web 应用
+
+# 视觉特征(用于区分不同模板)
+distinctiveFeatures:
+  - 浅色背景(#f5f7fb),白色面板
+  - 品牌色 #1677ff,hover #0958d9
+  - 小圆角体系(4/6/8/10px)
+  - 几乎无阴影(仅浮层用大阴影)
+  - 228px 浅色侧栏 + sticky topbar + 下划线式二级 tab
+  - 信息密度较高,适合数据型界面
+
+# 技术栈(所有模板共享,便于统一)
+stack:
+  framework: Vue 3
+  language: TypeScript
+  build: Vite
+  styling: 纯手写 CSS(令牌在 style.css 的 :root)
+  uiLibrary: 无
+  state: 无(组件内 ref/reactive)
+  router: vue-router
+
+# 默认是否推荐(多模板时,AI 在用户未指定时的默认选择)
+default: true
+
+# 版本
+version: 1.0.0

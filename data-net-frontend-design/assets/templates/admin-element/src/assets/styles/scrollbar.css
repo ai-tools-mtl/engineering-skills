@@ -1,0 +1,17 @@
+/* 全局滚动条:5px 宽,圆角,浅灰 */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background: #c9c9c9;
+}
+::-webkit-scrollbar-button {
+    display: none;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #ccc;
+}
+::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background: #eceaea;
+}

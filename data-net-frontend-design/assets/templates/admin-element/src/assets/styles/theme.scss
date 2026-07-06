@@ -1,0 +1,44 @@
+// 设计令牌(CSS 变量 + SCSS 变量双写)。
+// 本文件经 vite.config.ts 的 scss.additionalData 全局注入,所有 .scss 可直接用 $primary-color 等。
+// 改主题色:改 --primary-color。改字号阶梯:改 --font-size-*。
+:root {
+  // 字体阶梯(变量名即语义)
+  --font-size-main-title: 48px;
+  --font-size-sub-title: 40px;
+  --font-size-primary-title: 24px;
+  --font-size-large: 20px;
+  --font-size-middle: 18px;
+  --font-size-small: 16px;
+  --font-size-smaller: 14px;
+
+  // 通用
+  --line-height: 32px;
+  --page-min-width: 1440px; // 整套面向桌面,最小宽度 1440
+
+  // 颜色
+  --primary-color: #1677ff; // 品牌主色
+  --text-color: #333;
+  --text-color-secondary: #666;
+  --text-color-tertiary: #999;
+  --white: #fff;
+  --black: #000;
+}
+
+// SCSS 变量映射(供 @use 进来的文件用 $xxx)
+$font-size-main-title: var(--font-size-main-title);
+$font-size-sub-title: var(--font-size-sub-title);
+$font-size-primary-title: var(--font-size-primary-title);
+$font-size-large: var(--font-size-large);
+$font-size-middle: var(--font-size-middle);
+$font-size-small: var(--font-size-small);
+$font-size-smaller: var(--font-size-smaller);
+
+$page-min-width: var(--page-min-width);
+$line-height: var(--line-height);
+
+$primary-color: var(--primary-color);
+$text-color: var(--text-color);
+$text-color-secondary: var(--text-color-secondary);
+$text-color-tertiary: var(--text-color-tertiary);
+$white: var(--white);
+$black: var(--black);
